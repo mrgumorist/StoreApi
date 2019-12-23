@@ -96,5 +96,28 @@ namespace StoreApi.Controllers
                 return "Error";
             }
         }
+        [HttpGet]
+        public async Task<string> GetID([FromBody]object jsonData)
+        {
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization2"))
+            {
+                string token = "";
+                token = headers.GetValues("Authorization2").First();
+                if (token == "Basic dchZ2VudDM6cGFdGVzC5zc3dvmQ=")
+                {
+                    string token1 = headers.GetValues("Username").First();
+                    string token2 = headers.GetValues("Password").First();
+                    return await MyService.GetID(token1, token2);
+                }
+                return "Error";
+            }
+            else
+            {
+                return "Error";
+            }
+        }
     }
 }

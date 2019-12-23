@@ -32,5 +32,9 @@ namespace StoreApi.Services
         {
             return context.Users.First(x => x.Login == login && x.PassWord == password).Type;
         }
+        public async static Task<string> GetID(string login, string password)
+        {
+            return context.Users.First(x => x.Login == login && x.PassWord == password).Id.ToString();
+        }
     }
 }

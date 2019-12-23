@@ -14,7 +14,7 @@ namespace StoreApi.Models
         public string Inizialu { get; set; }
         public string Login { get; set; }
         public string PassWord { get; set; }
-        public string Type { get; set; } = "Seller";//Admin, Owner
+        public string Type { get; set; } = "Seller";//Admin, Owner 
         public DateTime LastLogin { get; set; }
         public virtual Store Store { get; set; }
     }

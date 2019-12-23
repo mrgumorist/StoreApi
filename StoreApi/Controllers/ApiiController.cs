@@ -28,7 +28,7 @@ namespace StoreApi.Controllers
         {
             var re = Request;
             var headers = re.Headers;
-           
+
             if (headers.Contains("Authorization2"))
             {
                 string token = "";
@@ -48,18 +48,18 @@ namespace StoreApi.Controllers
                     }
                     else
                     {
-                        return null;
+                        return "Error";
                     }
 
                 }
                 else
                 {
-                    return null;
+                    return "Error";
                 }
             }
-            
-                return null;
-            
+
+            return "Error";
+
             //}
 
             //var re = Request;
@@ -73,5 +73,28 @@ namespace StoreApi.Controllers
 
             //return null;
         }
-      }
+        [HttpGet]
+        public async Task<string> GetTypeOfAccount([FromBody]object jsonData)
+        {
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization2"))
+            {
+                string token = "";
+                token = headers.GetValues("Authorization2").First();
+                if (token == "Basic dchZ2VudDM6cGFdGVzC5zc3dvmQ=")
+                {
+                    string token1 = headers.GetValues("Username").First();
+                    string token2 = headers.GetValues("Password").First();
+                    return await MyService.GetTypeOfAccount(token1, token2);
+                }
+                return "Error";
+            }
+            else
+            {
+                return "Error";
+            }
+        }
+    }
 }

@@ -28,5 +28,9 @@ namespace StoreApi.Services
             context.Users.First(x => x.Login == login && x.PassWord == password).LastLogin = DateTime.Now;
             await context.SaveChangesAsync();
         }
+        public async static Task<string> GetTypeOfAccount(string login, string password)
+        {
+            return context.Users.First(x => x.Login == login && x.PassWord == password).Type;
+        }
     }
 }

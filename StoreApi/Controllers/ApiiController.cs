@@ -1,5 +1,7 @@
-﻿using StoreApi.DB;
+﻿using Newtonsoft.Json;
+using StoreApi.DB;
 using StoreApi.Models;
+using StoreApi.ModelsDto;
 using StoreApi.Services;
 using System;
 using System.Collections.Generic;
@@ -117,6 +119,29 @@ namespace StoreApi.Controllers
             else
             {
                 return "Error";
+            }
+        }
+        [HttpGet]
+        public async Task<HttpResponseMessage> GetStores([FromBody]object jsonData)
+        {
+            var re = Request;
+            var headers = re.Headers;
+
+            if (headers.Contains("Authorization2"))
+            {
+                string token = "";
+                token = headers.GetValues("Authorization2").First();
+                if (token == "Basic dchZ2VudDM6cGFdGVzC5zc3dvmQ=")
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, await MyService.GetStoreDTOs());
+                    return response;
+                    
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
         }
     }

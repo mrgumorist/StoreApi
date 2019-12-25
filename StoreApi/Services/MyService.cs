@@ -1,5 +1,6 @@
 ﻿using StoreApi.DB;
 using StoreApi.Models;
+using StoreApi.ModelsDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,15 @@ namespace StoreApi.Services
         public async static Task<string> GetID(string login, string password)
         {
             return context.Users.First(x => x.Login == login && x.PassWord == password).Id.ToString();
+        }
+        public async static Task<List<StoreDTO>> GetStoreDTOs()
+        {
+            List<StoreDTO> storeDTOs = new List<StoreDTO>();
+            foreach (var item in context.Stores)
+            {
+                storeDTOs.Add(new StoreDTO() { Name = item.Name, Id=item.Id });
+            }
+            return storeDTOs;
         }
     }
 }

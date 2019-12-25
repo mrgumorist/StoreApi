@@ -116,6 +116,7 @@
       <DependentUpon>201912211542337_loldwfe.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelsDto\StoreDTO.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
